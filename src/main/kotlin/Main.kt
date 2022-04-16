@@ -68,7 +68,7 @@ fun App() {
                 Text("пришел")
             }
 
-            Column (modifier = Modifier.padding(horizontal = 50.dp) {
+            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
                 Text("Пуся")
                 Text("пришел")
             }
