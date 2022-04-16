@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
+
+
 @Composable
 @Preview
 fun App() {
@@ -25,54 +27,29 @@ fun App() {
     Column (modifier = Modifier.padding(30.dp)) {
 
         Row (modifier = Modifier.padding(30.dp)) {
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
-
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
-
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
+            displayColumn()
+            displayColumn()
+            displayColumn()
         }
         Row (modifier = Modifier.padding(30.dp)) {
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
-
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
-
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
+            displayColumn()
+            displayColumn()
+            displayColumn()
         }
 
         Row (modifier = Modifier.padding(30.dp)) {
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
-
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
-
-            Column (modifier = Modifier.padding(horizontal = 50.dp)) {
-                Text("Пуся")
-                Text("пришел")
-            }
+            displayColumn()
+            displayColumn()
+            displayColumn()
         }
+    }
+}
+
+@Composable
+private fun displayColumn() {
+    Column(modifier = Modifier.padding(horizontal = 50.dp)) {
+        Text("Пуся")
+        Text("пришел")
     }
 }
 
