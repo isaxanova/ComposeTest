@@ -18,31 +18,52 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
-
+var i: Int = 0
 
 @Composable
 @Preview
 fun App() {
 
-    Column (modifier = Modifier.padding(30.dp)) {
+    Column(modifier = Modifier.padding(30.dp)) {
+        Button(
+            content = { displayRows() },
+            onClick = {
 
-        Row (modifier = Modifier.padding(30.dp)) {
+                i =i+1
+                sthg(i)
+
+            }
+        )
+
+
+        displayRows()
+    }
+}
+
+@Composable
+private fun displayRows() {
+    Column {
+        Row(modifier = Modifier.padding(30.dp)) {
             displayColumn()
             displayColumn()
             displayColumn()
         }
-        Row (modifier = Modifier.padding(30.dp)) {
+        Row(modifier = Modifier.padding(30.dp)) {
             displayColumn()
             displayColumn()
             displayColumn()
         }
 
-        Row (modifier = Modifier.padding(30.dp)) {
+        Row(modifier = Modifier.padding(30.dp)) {
             displayColumn()
             displayColumn()
             displayColumn()
         }
     }
+}
+
+fun sthg(value: Int) {
+    println("что-то произошло $value")
 }
 
 @Composable
