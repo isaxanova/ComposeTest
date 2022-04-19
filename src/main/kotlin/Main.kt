@@ -5,67 +5,105 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
-var i: Int = 0
+
+var input1 = 0f
+var input2 = 0f
+var resalt = 0f
 
 @Composable
 @Preview
 fun App() {
+    var text by rememberSaveable { mutableStateOf("Глупышка") }
+    var textcontent1 by rememberSaveable { mutableStateOf("") }
+    var textcontent2 by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(30.dp)) {
-        Button(
-            content = { displayRows() },
-            onClick = {
 
-                i =i+1
-                sthg(i)
+        TextField(
+            value = textcontent1,
+            onValueChange = {
+                textcontent1 = it
 
-            }
-        )
+            },
+            label = { Text("введите 1-е число") })
 
+        TextField(
+            value = textcontent2,
+            onValueChange = {
+                textcontent2 = it
 
-        displayRows()
+            },
+            label = { Text("введите 2-е число") })
+        Row {
+            Button(
+                modifier = Modifier.padding(0.dp),
+                content = { Text("+") },
+                onClick = {
+                    input1 = textcontent1.toFloat()
+                    input2 = textcontent2.toFloat()
+                    resalt = input1 + input2
+
+                    text = "$input1 + $input2 = $resalt"
+                }
+            )
+
+            Button(
+                modifier = Modifier.padding(start = 15.dp),
+                content = { Text("*") },
+                onClick = {
+                    input1 = textcontent1.toFloat()
+                    input2 = textcontent2.toFloat()
+                    resalt = input1 * input2
+
+                    text = "$input1 * $input2 = $resalt"
+                }
+            )
+
+            Button(
+                modifier = Modifier.padding(start = 15.dp),
+                content = { Text(":") },
+                onClick = {
+                    input1 = textcontent1.toFloat()
+                    input2 = textcontent2.toFloat()
+                    resalt = input1 / input2
+
+                    text = "$input1 : $input2 = $resalt"
+                }
+            )
+
+            Button(
+                modifier = Modifier.padding(start = 15.dp),
+                content = { Text("^") },
+                onClick = {
+                    input1 = textcontent1.toFloat()
+                    input2 = textcontent2.toFloat()
+                    resalt = 1f
+
+                    repeat(input2.toInt()) {
+                        resalt = resalt * input1
+                    }
+
+                    text = "$input1 ^ $input2 = $resalt"
+                }
+            )
+        }
+
+        Text(text)
+
     }
 }
 
-@Composable
-private fun displayRows() {
-    Column {
-        Row(modifier = Modifier.padding(30.dp)) {
-            displayColumn()
-            displayColumn()
-            displayColumn()
-        }
-        Row(modifier = Modifier.padding(30.dp)) {
-            displayColumn()
-            displayColumn()
-            displayColumn()
-        }
-
-        Row(modifier = Modifier.padding(30.dp)) {
-            displayColumn()
-            displayColumn()
-            displayColumn()
-        }
-    }
-}
-
-fun sthg(value: Int) {
-    println("что-то произошло $value")
-}
-
-@Composable
-private fun displayColumn() {
-    Column(modifier = Modifier.padding(horizontal = 50.dp)) {
-        Text("Пуся")
-        Text("пришел")
-    }
-}
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
