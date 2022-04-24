@@ -21,12 +21,18 @@ var input1 = 0f
 var input2 = 0f
 var resalt = 0f
 
+fun main() = application {
+    Window(onCloseRequest = ::exitApplication) {
+        App()
+    }
+}
+
 @Composable
 @Preview
 fun App() {
     var text by rememberSaveable { mutableStateOf("Глупышка") }
-    var textcontent1 by rememberSaveable { mutableStateOf("") }
-    var textcontent2 by rememberSaveable { mutableStateOf("") }
+    var textcontent1: String by rememberSaveable { mutableStateOf("") }
+    var textcontent2: String by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(30.dp)) {
 
@@ -46,29 +52,6 @@ fun App() {
             },
             label = { Text("введите 2-е число") })
         Row {
-            Button(
-                modifier = Modifier.padding(0.dp),
-                content = { Text("+") },
-                onClick = {
-                    input1 = textcontent1.toFloat()
-                    input2 = textcontent2.toFloat()
-                    resalt = input1 + input2
-
-                    text = "$input1 + $input2 = $resalt"
-                }
-            )
-
-            Button(
-                modifier = Modifier.padding(start = 15.dp),
-                content = { Text("*") },
-                onClick = {
-                    input1 = textcontent1.toFloat()
-                    input2 = textcontent2.toFloat()
-                    resalt = input1 * input2
-
-                    text = "$input1 * $input2 = $resalt"
-                }
-            )
 
             Button(
                 modifier = Modifier.padding(start = 15.dp),
@@ -97,16 +80,34 @@ fun App() {
                     text = "$input1 ^ $input2 = $resalt"
                 }
             )
+
+            Button(
+                modifier = Modifier.padding(start = 0.dp),
+                content = { Text("*") },
+                onClick = {
+                    text = botton2(textcontent1, textcontent2)
+                }
+            )
+            Button(
+                modifier = Modifier.padding(start = 15.dp),
+                content = { Text("+") },
+                onClick = {
+                    text = button1(textcontent1, textcontent2)
+                }
+            )
         }
-
         Text(text)
-
     }
 }
 
+fun button1(textcontent1: String, textcontent2: String): String {
+    input1 = textcontent1.toFloat()
+    input2 = textcontent2.toFloat()
+    return "${input1 + input2}"
+}
 
-fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
-        App()
-    }
+fun botton2(b: String, a: String): String {
+    input1 = a.toFloat()
+    input2 = b.toFloat()
+    return "${input1 * input2}"
 }

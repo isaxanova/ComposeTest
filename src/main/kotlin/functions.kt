@@ -1,4 +1,3 @@
-
 fun main() {
     myfunction()
     myfunction()
@@ -30,9 +29,9 @@ fun summ(a: Int, b: Int): Int {
 }
 
 fun max(param1: Int, param2: Int): Int {
-    if(param1>param2){
+    if (param1 > param2) {
         return param1
-    } else{
+    } else {
         return param2
     }
 }
