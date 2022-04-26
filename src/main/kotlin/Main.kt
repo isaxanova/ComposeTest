@@ -25,50 +25,43 @@ fun main() = application {
 @Composable
 @Preview
 fun App() {
-    var textcontent2: String by rememberSaveable { mutableStateOf("") }
-    var text: String by rememberSaveable { mutableStateOf("отправить") }
-
     Row {
         displayCalculationColumn()
+
+        var textFieldContent: String by rememberSaveable { mutableStateOf("") }
+        var buttonText: String by rememberSaveable { mutableStateOf("отправить") }
         Column {
             TextField(
-                value = textcontent2,
-                onValueChange = {
-                    textcontent2 = it
-                    println(it)
-                }
+                value = textFieldContent,
+                onValueChange = { textFieldContent = it }
             )
             Button(
                 modifier = Modifier.padding(start = 15.dp),
-                content = { Text(text) },
-                onClick = {
-                    text = "отправлено"
-
-                }
+                content = { Text(buttonText) },
+                onClick = { buttonText = "отправлено" }
             )
-            Text(text = textcontent2)
+            Text(text = textFieldContent)
 
             var sliderPosition by remember { mutableStateOf(0f) }
             var sliderColors by remember { mutableStateOf(0f) }
-            Box(Modifier.width(sliderPosition.dp).height(200.dp).background(color = Color(sliderColors,sliderColors,sliderColors)))
-            Column {
-                Text(text = "Текущее значение: ${sliderPosition}", fontSize = 22.sp)
-                Slider(
-                    value = sliderPosition,
-                    onValueChange = { sliderPosition = it },
-                    valueRange = 0f..200f
-                )
-            }
-
-            Column  {
-                Text(text = "Текущее значение: ${sliderColors}", fontSize = 22.sp)
-                Slider(
-                    value = sliderColors,
-                    onValueChange = { sliderColors = it },
-                    valueRange = 0f..1f
-                )
-            }
-
+            Box(
+                Modifier
+                    .width(sliderPosition.dp)
+                    .height(200.dp)
+                    .background(color = Color(sliderColors, sliderColors, sliderColors))
+            )
+            Text(text = "Текущее значение: $sliderPosition", fontSize = 22.sp)
+            Slider(
+                value = sliderPosition,
+                onValueChange = { sliderPosition = it },
+                valueRange = 0f..200f
+            )
+            Text(text = "Текущее значение: $sliderColors", fontSize = 22.sp)
+            Slider(
+                value = sliderColors,
+                onValueChange = { sliderColors = it },
+                valueRange = 0f..1f
+            )
         }
     }
 }
