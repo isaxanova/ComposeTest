@@ -34,23 +34,28 @@ fun main() = application {
 @Composable
 @Preview
 fun App() {
-    var firstButton = ButtenWithText(
-        Icons.Rounded.Menu,
-        "MENU"
-    )
-    var secondButton = ButtenWithText(
-        Icons.Rounded.Add,
-        "ADD"
-    )
-    var thirdButton = ButtenWithText(
-        Icons.Default.Share,
-        "SHARE"
-    )
 
+    Row {
+        var firstButton = ButtenWithText(Icons.Rounded.Menu, "MENU")
+        var secondButton = ButtenWithText(Icons.Rounded.Add, "ADD")
+        var thirdButton = ButtenWithText(Icons.Default.Share, "SHARE")
+        ColumnButten(firstButton, secondButton, thirdButton)
+
+        var fourButton = ButtenWithText(Icons.Rounded.Menu, "MENU")
+        var fiveButton = ButtenWithText(Icons.Rounded.Add, "ADD")
+        var sixButton = ButtenWithText(Icons.Default.Share, "SHARE")
+
+        ColumnButten(fourButton, fiveButton, sixButton)
+
+    }
+}
+
+@Composable
+fun ColumnButten(param1: ButtenWithText, param2: ButtenWithText, param3: ButtenWithText) {
     Column {
-        displayButtenWithText(firstButton)
-        displayButtenWithText(secondButton)
-        displayButtenWithText(thirdButton)
+        displayButtenWithText(param1)
+        displayButtenWithText(param2)
+        displayButtenWithText(param3)
     }
 }
 
@@ -61,12 +66,18 @@ fun displayButtenWithText(param: ButtenWithText) {
             Icon(imageVector = param.icon, contentDescription = null)
             Text(param.text)
         },
-        onClick = {}
+        onClick = {
+            param.nameOnParams()
+        }
     )
 }
 
 class ButtenWithText(
     var icon: ImageVector,
     var text: String,
-)
+) {
+    fun nameOnParams() {
+        println(" этого экземпляра параметр текст =$text")
+    }
+}
 
