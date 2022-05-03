@@ -1,3 +1,4 @@
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -30,6 +31,7 @@ fun botton2(b: String, a: String): String {
 }
 
 @Composable
+@Preview
 fun displayCalculationColumn(){
     var text by rememberSaveable { mutableStateOf("Глупышка") }
     var textcontent1: String by rememberSaveable { mutableStateOf("") }
