@@ -40,9 +40,15 @@ fun displayText() {
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             Button(
-                content = { Text("ПОСЧИТАТЬ") },
+                content = { Text("Clone") },
                 onClick = {
-                    resultText = inputText
+                    resultText = duplicateText(inputText)//inputText + " " + inputText
+                }
+            )
+            Button(
+                content = { Text("Result + previus") },
+                onClick = {
+                    resultText = summa(resultText,inputText)//inputText + " " + inputText
                 }
             )
         }
@@ -50,4 +56,11 @@ fun displayText() {
             Text(resultText)
         }
     }
+}
+
+fun duplicateText(text: String): String {
+    return text + " " + text
+}
+fun summa (text1:String,text2:String): String {
+    return text1 +" "+ text2
 }
