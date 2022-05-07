@@ -74,6 +74,13 @@ fun displayText() {
                     resultText = inputText1[0].toString()
                 }
             )
+            Button(
+                content = { Text("Получить Инициалы") },
+                onClick = {
+                    resultText = initials(text1 = inputText1, text2 = inputText2)
+
+                }
+            )
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             Text(resultText)
@@ -99,4 +106,8 @@ fun summ(text1: String, text2: String): String {
 fun nameAria(text1: String, text2: String): String {
     val result = text1 + ", добропожаловать в город " + text2
     return result
+}
+
+fun initials(text1: String, text2: String): String {
+    return text1[0].toString() + ". " + text2[0].toString() + "."
 }
