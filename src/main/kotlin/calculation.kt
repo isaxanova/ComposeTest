@@ -18,11 +18,6 @@ private var input1 = 0f
 private var input2 = 0f
 private var resalt = 0f
 
-fun button1(textcontent1: String, textcontent2: String): String {
-    val input1 = textcontent1.toFloat()
-    val input2 = textcontent2.toFloat()
-    return "${input1 + input2}"
-}
 
 fun botton2(b: String, a: String): String {
     input1 = a.toFloat()
@@ -95,7 +90,7 @@ fun displayCalculationColumn(){
                 modifier = Modifier.padding(start = 15.dp),
                 content = { Text("+") },
                 onClick = {
-                    text = button1(textcontent1, textcontent2)
+                    text =summ(textcontent1, textcontent2)
                 }
             )
         }

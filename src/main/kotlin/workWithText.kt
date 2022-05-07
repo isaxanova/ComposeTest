@@ -52,17 +52,14 @@ fun displayText() {
             Button(
                 content = { Text("Result + previus") },
                 onClick = {
-                    resultText = summa(resultText, inputText1)
+                    resultText = previousPlusCurrent(resultText, inputText1)
                 }
             )
             Button(
                 content = { Text("Сумма чисел") },
                 onClick = {
-                    var input1 = inputText1.toFloat()
-                    var input2 = inputText2.toFloat()
-                    var result: Float = input1 + input2
+                    resultText = summ(text1 = inputText1, text2 = inputText2)
 
-                    resultText = result.toString()
                 }
             )
         }
@@ -76,6 +73,13 @@ fun duplicateText(text: String): String {
     return text + " " + text
 }
 
-fun summa(text1: String, text2: String): String {
+fun previousPlusCurrent(text1: String, text2: String): String {
     return text1 + " " + text2
+}
+fun summ (text1: String,text2: String):String{
+    val input1 = text1.toFloat()
+    val input2 = text2.toFloat()
+    val result: Float = input1 + input2
+    return result.toString()
+
 }
