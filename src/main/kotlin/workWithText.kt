@@ -6,17 +6,14 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
-
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
@@ -27,14 +24,21 @@ fun main() = application {
 @Composable
 @Preview
 fun displayText() {
-    var inputText by rememberSaveable { mutableStateOf("") }
+    var inputText1 by rememberSaveable { mutableStateOf("") }
     var resultText by rememberSaveable { mutableStateOf("") }
+    var inputText2 by rememberSaveable { mutableStateOf("") }
     Row {
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             TextField(
-                value = inputText,
+                value = inputText1,
                 onValueChange = {
-                    inputText = it
+                    inputText1 = it
+                }
+            )
+            TextField(
+                value = inputText2,
+                onValueChange = {
+                    inputText2 = it
                 }
             )
         }
@@ -42,13 +46,13 @@ fun displayText() {
             Button(
                 content = { Text("Clone") },
                 onClick = {
-                    resultText = duplicateText(inputText)//inputText + " " + inputText
+                    resultText = duplicateText(inputText1)
                 }
             )
             Button(
                 content = { Text("Result + previus") },
                 onClick = {
-                    resultText = summa(resultText,inputText)//inputText + " " + inputText
+                    resultText = summa(resultText,inputText1)
                 }
             )
         }
