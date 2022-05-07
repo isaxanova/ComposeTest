@@ -14,13 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 
-var input1 = 0f
-var input2 = 0f
-var resalt = 0f
+private var input1 = 0f
+private var input2 = 0f
+private var resalt = 0f
 
 fun button1(textcontent1: String, textcontent2: String): String {
-    input1 = textcontent1.toFloat()
-    input2 = textcontent2.toFloat()
+    val input1 = textcontent1.toFloat()
+    val input2 = textcontent2.toFloat()
     return "${input1 + input2}"
 }
 
