@@ -62,6 +62,13 @@ fun displayText() {
 
                 }
             )
+            Button(
+                content = { Text("добропожаловать в город") },
+                onClick = {
+                    resultText = nameAria(text1 = inputText1, text2 = inputText2)
+
+                }
+            )
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             Text(resultText)
@@ -76,10 +83,15 @@ fun duplicateText(text: String): String {
 fun previousPlusCurrent(text1: String, text2: String): String {
     return text1 + " " + text2
 }
-fun summ (text1: String,text2: String):String{
+
+fun summ(text1: String, text2: String): String {
     val input1 = text1.toFloat()
     val input2 = text2.toFloat()
     val result: Float = input1 + input2
     return result.toString()
+}
 
+fun nameAria(text1: String, text2: String): String {
+    val result= text1 + ", добропожаловать в город " + text2
+    return result
 }
