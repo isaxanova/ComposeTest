@@ -66,7 +66,12 @@ fun displayText() {
                 content = { Text("добропожаловать в город") },
                 onClick = {
                     resultText = nameAria(text1 = inputText1, text2 = inputText2)
-
+                }
+            )
+            Button(
+                content = { Text("Получить первую букву") },
+                onClick = {
+                    resultText = inputText1[0].toString()
                 }
             )
         }
@@ -92,6 +97,6 @@ fun summ(text1: String, text2: String): String {
 }
 
 fun nameAria(text1: String, text2: String): String {
-    val result= text1 + ", добропожаловать в город " + text2
+    val result = text1 + ", добропожаловать в город " + text2
     return result
 }
