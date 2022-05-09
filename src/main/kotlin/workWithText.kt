@@ -88,6 +88,12 @@ fun displayText() {
                     printAllLetters(inputText1)
                 }
             )
+            Button(
+                content = { Text("Напечатать четные буквы") },
+                onClick = {
+                    resultText = printEven(inputText1)
+                }
+            )
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             Text(resultText)
@@ -123,6 +129,18 @@ fun printAllLetters(text: String) {
     println(" Длина текста = ${text.length}")
 
     for (index in 0..text.length - 1) {
-        println("$index: ${text[index]}")
+        println("" + index + ": " + text[index])
     }
+}
+
+fun printEven(text: String): String {
+    var temp = ""
+    for (index in 0..text.length - 1) {
+        if (index % 2 == 0) {
+            temp = temp + text[index]
+            println("" + index + ": " + text[index])
+        }
+    }
+    return temp
+
 }
