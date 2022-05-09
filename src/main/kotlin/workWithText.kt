@@ -27,6 +27,7 @@ fun displayText() {
     var inputText1 by rememberSaveable { mutableStateOf("") }
     var resultText by rememberSaveable { mutableStateOf("") }
     var inputText2 by rememberSaveable { mutableStateOf("") }
+
     Row {
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             TextField(
@@ -81,6 +82,12 @@ fun displayText() {
 
                 }
             )
+            Button(
+                content = { Text("Напечатать все буквы") },
+                onClick = {
+                    printAllLetters(inputText1)
+                }
+            )
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
             Text(resultText)
@@ -110,4 +117,12 @@ fun nameAria(text1: String, text2: String): String {
 
 fun initials(text1: String, text2: String): String {
     return text1[0].toString() + ". " + text2[0].toString() + "."
+}
+
+fun printAllLetters(text: String) {
+    println(" Длина текста = ${text.length}")
+
+    for (index in 0..text.length - 1) {
+        println("$index: ${text[index]}")
+    }
 }
