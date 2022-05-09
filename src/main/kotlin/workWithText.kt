@@ -79,7 +79,6 @@ fun displayText() {
                 content = { Text("Получить Инициалы") },
                 onClick = {
                     resultText = initials(text1 = inputText1, text2 = inputText2)
-
                 }
             )
             Button(
@@ -92,6 +91,18 @@ fun displayText() {
                 content = { Text("Напечатать четные буквы") },
                 onClick = {
                     resultText = printEven(inputText1)
+                }
+            )
+            Button(
+                content = { Text("Напечатать нечетные буквы") },
+                onClick = {
+                    resultText = printOdd(inputText1)
+                }
+            )
+            Button(
+                content = { Text("Напечатать кратные буквы") },
+                onClick = {
+                    resultText = printtext2(inputText1, inputText2)
                 }
             )
         }
@@ -138,9 +149,28 @@ fun printEven(text: String): String {
     for (index in 0..text.length - 1) {
         if (index % 2 == 0) {
             temp = temp + text[index]
-            println("" + index + ": " + text[index])
         }
     }
     return temp
+}
 
+fun printOdd(text: String): String {
+    var temp = ""
+    for (index in 0..text.length - 1) {
+        if (index % 2 != 0) {
+            temp = temp + text[index]
+        }
+    }
+    return temp
+}
+
+fun printtext2(text1: String, text2: String): String {
+    val number = text2.toInt()
+    var temp = ""
+    for (index in 0..text1.length - 1) {
+        if (index % number == 0) {
+            temp = temp + text1[index]
+        }
+    }
+    return temp
 }
