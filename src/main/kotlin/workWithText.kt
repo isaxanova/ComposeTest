@@ -2,6 +2,7 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -107,12 +108,12 @@ fun displayText() {
             Button(
                 content = { Text("Нарисовать звездочки") },
                 onClick = {
-                    resultText = printStars(inputText1)
+                    resultText = printStars(inputText1,inputText2)
                 }
             )
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-            Text(resultText)
+            SelectionContainer {Text(resultText)}
         }
     }
 }
@@ -180,11 +181,17 @@ fun printText2(text1: String, text2: String): String {
     return temp
 }
 
-fun printStars(text1: String): String {
-    var number = text1.toInt()
+fun printStars(text1: String,text2: String): String {
+    var numberLines = text1.toInt()
+    var number = text2.toInt()
     var stars: String = ""
     for (index in 1..number) {
-        stars = stars + "***\n"
+        stars = stars + "*"
     }
-    return stars
+    var lines = ""
+    for (index in 1..numberLines){
+        lines = lines + stars+"\n"
+    }
+
+    return lines
 }
