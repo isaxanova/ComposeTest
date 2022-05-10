@@ -108,12 +108,18 @@ fun displayText() {
             Button(
                 content = { Text("Нарисовать звездочки") },
                 onClick = {
-                    resultText = printStars(inputText1,inputText2)
+                    resultText = printStars(inputText1, inputText2)
+                }
+            )
+            Button(
+                content = { Text("Нарисовать  матрицу") },
+                onClick = {
+                    resultText = printMathrics(inputText1, inputText2)
                 }
             )
         }
         Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-            SelectionContainer {Text(resultText)}
+            SelectionContainer { Text(resultText) }
         }
     }
 }
@@ -181,7 +187,7 @@ fun printText2(text1: String, text2: String): String {
     return temp
 }
 
-fun printStars(text1: String,text2: String): String {
+fun printStars(text1: String, text2: String): String {
     var numberLines = text1.toInt()
     var number = text2.toInt()
     var stars: String = ""
@@ -189,9 +195,25 @@ fun printStars(text1: String,text2: String): String {
         stars = stars + "*"
     }
     var lines = ""
-    for (index in 1..numberLines){
-        lines = lines + stars+"\n"
+    for (index in 1..numberLines) {
+        lines = lines + stars + "\n"
     }
 
     return lines
+}
+
+fun printMathrics(text1: String, text2: String):String {
+    var numberOfRows = text1.toInt()
+    var numberOfColumns = text2.toInt()
+
+    var result = ""
+    for (indexC in 0..numberOfColumns-1) {
+        for (indexR in 0..numberOfRows-1) {
+
+            result = result + "["+indexC+":"+indexR+ "] "
+
+        }
+        result=result+"\n"
+    }
+    return result
 }
