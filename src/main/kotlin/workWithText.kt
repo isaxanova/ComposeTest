@@ -60,7 +60,6 @@ fun displayText() {
                 content = { Text("Сумма чисел") },
                 onClick = {
                     resultText = summ(text1 = inputText1, text2 = inputText2)
-
                 }
             )
             Button(
@@ -102,7 +101,13 @@ fun displayText() {
             Button(
                 content = { Text("Напечатать кратные буквы") },
                 onClick = {
-                    resultText = printtext2(inputText1, inputText2)
+                    resultText = printText2(inputText1, inputText2)
+                }
+            )
+            Button(
+                content = { Text("Нарисовать звездочки") },
+                onClick = {
+                    resultText = printStars(inputText1)
                 }
             )
         }
@@ -164,7 +169,7 @@ fun printOdd(text: String): String {
     return temp
 }
 
-fun printtext2(text1: String, text2: String): String {
+fun printText2(text1: String, text2: String): String {
     val number = text2.toInt()
     var temp = ""
     for (index in 0..text1.length - 1) {
@@ -173,4 +178,13 @@ fun printtext2(text1: String, text2: String): String {
         }
     }
     return temp
+}
+
+fun printStars(text1: String): String {
+    var number = text1.toInt()
+    var stars: String = ""
+    for (index in 1..number) {
+        stars = stars + "***\n"
+    }
+    return stars
 }
