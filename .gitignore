@@ -1,3 +1,4 @@
 # Project exclude paths
 /.gradle/
 /build/drawing.kt
+/src/main/kotlin/drawing.kt
