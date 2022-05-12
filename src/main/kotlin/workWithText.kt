@@ -125,7 +125,12 @@ fun displayText() {
 }
 
 fun duplicateText(text: String): String {
+    text.length
     return text + " " + text
+}
+
+fun String.duplicate(): String {
+    return this + this
 }
 
 fun previousPlusCurrent(text1: String, text2: String): String {
@@ -202,18 +207,18 @@ fun printStars(text1: String, text2: String): String {
     return lines
 }
 
-fun printMathrics(text1: String, text2: String):String {
+fun printMathrics(text1: String, text2: String): String {
     var numberOfRows = text1.toInt()
     var numberOfColumns = text2.toInt()
 
     var result = ""
-    for (indexC in 0..numberOfColumns-1) {
-        for (indexR in 0..numberOfRows-1) {
+    for (indexC in 0..numberOfColumns - 1) {
+        for (indexR in 0..numberOfRows - 1) {
 
-            result = result + "["+indexC+":"+indexR+ "] "
+            result = result + "[" + indexC + ":" + indexR + "] "
 
         }
-        result=result+"\n"
+        result = result + "\n"
     }
     return result
 }
