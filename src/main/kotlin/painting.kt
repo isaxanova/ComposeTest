@@ -13,6 +13,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import kotlin.math.sin
@@ -55,10 +56,9 @@ fun paint() {
 
                 for (i in 0..size.maxDimension.toInt() step 1) {
                     val x = i.toFloat()
-                    val y = y2(x = i.toFloat())
+                    val y = y2(x)
 
-                    val point = Offset(x, y)
-                    points.add(point)
+                    points.add(Offset(x, y))
                 }
 
                 drawRect(
@@ -66,27 +66,44 @@ fun paint() {
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
-                drawCircle(
-                    color = Color.Blue,
-                    center = Offset(x = size.width / 2, y = size.height / 2),
-                    radius = size.minDimension / 4
-                )
-                drawLine(
-                    start = Offset(x = size.width, y = 0f),
-                    end = Offset(x = 0f, y = size.height),
-                    color = Color.Blue
-                )
+
                 drawPoints(
                     points = points,
                     color = Color.Red,
                     strokeWidth = 5f,
                     pointMode = PointMode.Points
                 )
+                var axisPoints = mutableListOf<Offset>()
+                for (i in 0..size.width.toInt()) {
+                    val x = i
+                    val y = size.height / 2
+
+
+                }
+                drawPoints(
+
+
+                )
+                drawAxis()
+
             }
         }
     }
 
 }
 
+private fun DrawScope.drawAxis() {
+    drawLine(
+        start = Offset(x = 0f, y = size.height / 2),
+        end = Offset(x = size.width, y = size.height / 2),
+        color = Color.Black
+    )
+    drawLine(
+        start = Offset(x = size.width / 2, y = 0f),
+        end = Offset(x = size.width / 2, y = size.height),
+        color = Color.Black
+    )
+}
+
 fun y(x: Float): Float = 5f + x
-fun y2(x: Float): Float = sin(x / 10) * 10 + 100
+fun y2(x: Float): Float = sin(x / 100) * 100 + 100
