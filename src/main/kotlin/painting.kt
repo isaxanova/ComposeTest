@@ -27,15 +27,20 @@ fun main() = application {
 fun paint() {
     var rectPosition by remember { mutableStateOf(0f) }
     var widthCanvas by remember { mutableStateOf(0f) }
-
+    var colorRect by remember { mutableStateOf(Color.Blue) }
 
     Row {
         Column {
             Button(
-                onClick = {}
+                onClick = {
+                    if (colorRect == Color.Blue) {
+                        colorRect = Color.Red
+                    } else colorRect = Color.Blue
+                }
             ) {
-                Text("do smth")
+                Text("change color")
             }
+
         }
         Column {
             Slider(
@@ -47,7 +52,7 @@ fun paint() {
                 widthCanvas = size.width
 
                 drawRect(
-                    color = Color.Blue,
+                    color = colorRect,
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
