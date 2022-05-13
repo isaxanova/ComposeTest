@@ -26,6 +26,8 @@ fun main() = application {
 @Preview
 fun paint() {
     var rectPosition by remember { mutableStateOf(0f) }
+    var widthCanvas by remember { mutableStateOf(0f) }
+
 
     Row {
         Column {
@@ -38,12 +40,11 @@ fun paint() {
         Column {
             Slider(
                 value = rectPosition,
-                onValueChange = {rectPosition=it},
-                valueRange = 0f..500f
+                onValueChange = { rectPosition = it },
+                valueRange = 0f..widthCanvas
             )
             Canvas(modifier = Modifier.background(Color.Gray).fillMaxSize()) {
-                val canvasWidth = size.width
-                val canvasHeight = size.height
+                widthCanvas = size.width
 
                 drawRect(
                     color = Color.Blue,
