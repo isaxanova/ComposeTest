@@ -54,6 +54,7 @@ fun paint() {
                 widthCanvas = size.width
                 val points = mutableListOf<Offset>()
 
+
                 for (i in 0..size.maxDimension.toInt() step 1) {
                     val x = i.toFloat()
                     val y = y2(x)
@@ -73,23 +74,42 @@ fun paint() {
                     strokeWidth = 5f,
                     pointMode = PointMode.Points
                 )
-                var axisPoints = mutableListOf<Offset>()
-                for (i in 0..size.width.toInt()) {
-                    val x = i
-                    val y = size.height / 2
+                drawAxisPoints()
 
 
-                }
-                drawPoints(
-
-
-                )
                 drawAxis()
 
             }
         }
     }
 
+}
+
+private fun DrawScope.drawAxisPoints() {
+    var axisPointsX = mutableListOf<Offset>()
+    for (i in 0..size.width.toInt() step 50) {
+        val x = i.toFloat()
+        val y = size.height / 2
+        axisPointsX.add(Offset(x, y))
+    }
+    drawPoints(
+        points = axisPointsX,
+        color = Color.Red,
+        strokeWidth = 5f,
+        pointMode = PointMode.Points
+    )
+    var axisPointsY = mutableListOf<Offset>()
+    for (i in 0..size.width.toInt() step 50) {
+        val x = size.width / 2
+        val y = i.toFloat()
+        axisPointsY.add(Offset(x, y))
+    }
+    drawPoints(
+        points = axisPointsY,
+        color = Color.Red,
+        strokeWidth = 5f,
+        pointMode = PointMode.Points
+    )
 }
 
 private fun DrawScope.drawAxis() {
