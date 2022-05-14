@@ -14,6 +14,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import kotlin.math.sin
@@ -30,6 +31,7 @@ fun paint() {
     var rectPosition by remember { mutableStateOf(0f) }
     var widthCanvas by remember { mutableStateOf(0f) }
     var colorRect by remember { mutableStateOf(Color.Blue) }
+    var offsetText by remember { mutableStateOf(Offset(0f, 0f)) }
 
     Row {
         Column {
@@ -50,39 +52,47 @@ fun paint() {
                 onValueChange = { rectPosition = it },
                 valueRange = 0f..widthCanvas
             )
-            Canvas(modifier = Modifier.background(Color.Gray).fillMaxSize()) {
+            Canvas(
+                modifier = Modifier
+                    .background(Color.Gray)
+                    .fillMaxSize()
+                    .onMouseMove(PointerEventType.Move) {
+                        offsetText = it
+                    }
+            ) {
                 widthCanvas = size.width
-                val points = mutableListOf<Offset>()
-
-
-                for (i in 0..size.maxDimension.toInt() step 1) {
-                    val x = i.toFloat()
-                    val y = y2(x)
-
-                    points.add(Offset(x, y))
-                }
 
                 drawRect(
                     color = colorRect,
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
-
-                drawPoints(
-                    points = points,
-                    color = Color.Red,
-                    strokeWidth = 5f,
-                    pointMode = PointMode.Points
-                )
+                drawText(offsetText.toString(), x = offsetText.x, y = offsetText.y+100f)
+                drawSin()
                 drawAxisPoints()
-
-
                 drawAxis()
-
             }
         }
     }
 
+}
+
+private fun DrawScope.drawSin() {
+    val points = mutableListOf<Offset>()
+
+
+    for (i in 0..size.maxDimension.toInt() step 1) {
+        val x = i.toFloat()
+        val y = y2(x)
+        points.add(Offset(x, y))
+    }
+
+    drawPoints(
+        points = points,
+        color = Color.Red,
+        strokeWidth = 5f,
+        pointMode = PointMode.Points
+    )
 }
 
 private fun DrawScope.drawAxisPoints() {
