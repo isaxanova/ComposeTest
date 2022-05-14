@@ -32,6 +32,7 @@ fun paint() {
     var widthCanvas by remember { mutableStateOf(0f) }
     var colorRect by remember { mutableStateOf(Color.Blue) }
     var offsetText by remember { mutableStateOf(Offset(0f, 0f)) }
+    var line by remember { mutableStateOf(mutableListOf<Offset>()) }
 
     Row {
         Column {
@@ -58,6 +59,7 @@ fun paint() {
                     .fillMaxSize()
                     .onMouseMove(PointerEventType.Move) {
                         offsetText = it
+                        line.add(it)
                     }
             ) {
                 widthCanvas = size.width
@@ -67,10 +69,17 @@ fun paint() {
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
-                drawText(offsetText.toString(), x = offsetText.x, y = offsetText.y+100f)
+                drawText(offsetText.toString(), x = offsetText.x, y = offsetText.y + 100f)
                 drawSin()
                 drawAxisPoints()
                 drawAxis()
+
+                drawPoints(
+                    points = line,
+                    color = Color.Green,
+                    strokeWidth = 15f,
+                    pointMode = PointMode.Polygon
+                )
             }
         }
     }
