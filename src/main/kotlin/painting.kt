@@ -69,8 +69,11 @@ fun paint() {
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
+                var newxy = newXY(offsetText)
+                val oldxy = oldXY(newxy)
+
                 drawText(
-                    text = offsetText.toString() + " -> " + newXY(offsetText).toString(),
+                    text = offsetText.toString() + " -> " + newxy.toString()+ " -> " + oldxy.toString(),
                     x = offsetText.x,
                     y = offsetText.y + 100f
                 )
@@ -97,6 +100,12 @@ fun DrawScope.newXY(old: Offset): Offset {
     return Offset(x = old.x - newX, y = newY-old.y)
 }
 
+fun DrawScope.oldXY (old: Offset):Offset{
+    var newX: Float = size.width / 2
+    var newY: Float = size.height / 2
+
+    return Offset(x=old.x+newX,y=-old.y+newY )
+}
 private fun DrawScope.drawSin() {
     val points = mutableListOf<Offset>()
 
