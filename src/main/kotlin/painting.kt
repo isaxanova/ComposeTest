@@ -73,7 +73,7 @@ fun paint() {
                 val oldxy = oldXY(newxy)
 
                 drawText(
-                    text = offsetText.toString() + " -> " + newxy.toString()+ " -> " + oldxy.toString(),
+                    text = offsetText.toString() + " -> " + newxy.toString() + " -> " + oldxy.toString(),
                     x = offsetText.x,
                     y = offsetText.y + 100f
                 )
@@ -97,15 +97,26 @@ fun DrawScope.newXY(old: Offset): Offset {
     var newX: Float = size.width / 2
     var newY: Float = size.height / 2
 
-    return Offset(x = old.x - newX, y = newY-old.y)
+    return Offset(x = old.x - newX, y = newY - old.y)
 }
 
-fun DrawScope.oldXY (old: Offset):Offset{
+fun DrawScope.oldXY(old: Offset): Offset {
     var newX: Float = size.width / 2
     var newY: Float = size.height / 2
 
-    return Offset(x=old.x+newX,y=-old.y+newY )
+    return Offset(x = old.x + newX, y = -old.y + newY)
 }
+
+fun DrawScope.oldY(oldY: Float): Float {
+    var newY: Float = size.height / 2
+    return -oldY + newY
+}
+fun DrawScope.oldX(oldX: Float): Float {
+    var newX: Float = size.width / 2
+    return oldX + newX
+}
+
+
 private fun DrawScope.drawSin() {
     val points = mutableListOf<Offset>()
 
@@ -126,9 +137,10 @@ private fun DrawScope.drawSin() {
 
 private fun DrawScope.drawAxisPoints() {
     var axisPointsX = mutableListOf<Offset>()
-    for (i in 0..size.width.toInt() step 50) {
-        val x = i.toFloat()
-        val y = size.height / 2
+    for (i in -1500..1500 step 100) {
+        val x = oldX(i.toFloat())
+        val y = oldY(0f)
+
         axisPointsX.add(Offset(x, y))
     }
     drawPoints(
@@ -138,9 +150,9 @@ private fun DrawScope.drawAxisPoints() {
         pointMode = PointMode.Points
     )
     var axisPointsY = mutableListOf<Offset>()
-    for (i in 0..size.width.toInt() step 50) {
-        val x = size.width / 2
-        val y = i.toFloat()
+    for (i in -500..500 step 100) {
+        val x = oldX(0f)
+        val y = oldY(i.toFloat())
         axisPointsY.add(Offset(x, y))
     }
     drawPoints(
