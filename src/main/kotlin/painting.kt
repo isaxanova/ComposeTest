@@ -31,7 +31,7 @@ fun paint() {
     var rectPosition by remember { mutableStateOf(0f) }
     var widthCanvas by remember { mutableStateOf(0f) }
     var colorRect by remember { mutableStateOf(Color.Blue) }
-    var offsetText by remember { mutableStateOf(Offset(0f, 0f)) }
+    var offsetText: Offset by remember { mutableStateOf(Offset(0f, 0f)) }
     var line by remember { mutableStateOf(mutableListOf<Offset>()) }
 
     Row {
@@ -69,21 +69,32 @@ fun paint() {
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
-                drawText(offsetText.toString(), x = offsetText.x, y = offsetText.y + 100f)
+                drawText(
+                    text = offsetText.toString() + " -> " + newXY(offsetText).toString(),
+                    x = offsetText.x,
+                    y = offsetText.y + 100f
+                )
                 drawSin()
                 drawAxisPoints()
                 drawAxis()
 
-                drawPoints(
-                    points = line,
-                    color = Color.Green,
-                    strokeWidth = 15f,
-                    pointMode = PointMode.Polygon
-                )
+//                drawPoints(
+//                    points = line,
+//                    color = Color.Green,
+//                    strokeWidth = 15f,
+//                    pointMode = PointMode.Polygon
+//                )
             }
         }
     }
 
+}
+
+fun DrawScope.newXY(old: Offset): Offset {
+    var newX: Float = size.width / 2
+    var newY: Float = size.height / 2
+
+    return Offset(x = old.x - newX, y = newY-old.y)
 }
 
 private fun DrawScope.drawSin() {
