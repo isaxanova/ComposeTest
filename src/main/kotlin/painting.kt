@@ -69,8 +69,8 @@ fun paint() {
                     topLeft = Offset(x = rectPosition, y = 150f),
                     size = Size(50f, 80f)
                 )
-                var newxy = newXY(offsetText)
-                val oldxy = oldXY(newxy)
+                var newxy = toCoordinateXY(offsetText)
+                val oldxy = toDisplayXY(newxy)
 
                 drawText(
                     text = offsetText.toString() + " -> " + newxy.toString() + " -> " + oldxy.toString(),
@@ -93,38 +93,45 @@ fun paint() {
 
 }
 
-fun DrawScope.newXY(old: Offset): Offset {
-    var newX: Float = size.width / 2
-    var newY: Float = size.height / 2
+fun DrawScope.toCoordinateXY(old: Offset): Offset {
+    val newX: Float = size.width / 2
+    val newY: Float = size.height / 2
 
     return Offset(x = old.x - newX, y = newY - old.y)
 }
 
-fun DrawScope.oldXY(old: Offset): Offset {
-    var newX: Float = size.width / 2
-    var newY: Float = size.height / 2
-
-    return Offset(x = old.x + newX, y = -old.y + newY)
+fun DrawScope.toCoordinateX(x: Float): Float {
+    val newX: Float = size.width / 2
+    return x - newX
 }
 
-fun DrawScope.oldY(oldY: Float): Float {
-    var newY: Float = size.height / 2
+fun DrawScope.toCoordinateY(y: Float): Float {
+    val newY: Float = size.height / 2
+    return newY - y
+}
+
+fun DrawScope.toDisplayXY(old: Offset): Offset {
+    return Offset(x = toDisplayX(old.x), y = toDisplayY(old.y))
+}
+
+fun DrawScope.toDisplayY(oldY: Float): Float {
+    val newY: Float = size.height / 2
     return -oldY + newY
 }
-fun DrawScope.oldX(oldX: Float): Float {
-    var newX: Float = size.width / 2
+
+fun DrawScope.toDisplayX(oldX: Float): Float {
+    val newX: Float = size.width / 2
     return oldX + newX
 }
-
 
 private fun DrawScope.drawSin() {
     val points = mutableListOf<Offset>()
 
 
-    for (i in 0..size.maxDimension.toInt() step 1) {
+    for (i in toCoordinateX(-100f).toInt()..toCoordinateX(100f).toInt() step 1) {
         val x = i.toFloat()
         val y = y2(x)
-        points.add(Offset(x, y))
+        points.add(toDisplayXY(Offset(x, y)))
     }
 
     drawPoints(
@@ -138,8 +145,8 @@ private fun DrawScope.drawSin() {
 private fun DrawScope.drawAxisPoints() {
     var axisPointsX = mutableListOf<Offset>()
     for (i in -1500..1500 step 100) {
-        val x = oldX(i.toFloat())
-        val y = oldY(0f)
+        val x = toDisplayX(i.toFloat())
+        val y = toDisplayY(0f)
 
         axisPointsX.add(Offset(x, y))
     }
@@ -151,8 +158,8 @@ private fun DrawScope.drawAxisPoints() {
     )
     var axisPointsY = mutableListOf<Offset>()
     for (i in -500..500 step 100) {
-        val x = oldX(0f)
-        val y = oldY(i.toFloat())
+        val x = toDisplayX(0f)
+        val y = toDisplayY(i.toFloat())
         axisPointsY.add(Offset(x, y))
     }
     drawPoints(
@@ -177,4 +184,4 @@ private fun DrawScope.drawAxis() {
 }
 
 fun y(x: Float): Float = 5f + x
-fun y2(x: Float): Float = sin(x / 100) * 100 + 100
+fun y2(x: Float): Float = sin(x / 100) * 100
