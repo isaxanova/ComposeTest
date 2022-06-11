@@ -27,7 +27,7 @@ fun main() = application {
 
 @Composable
 @Preview
-fun paint() {
+private fun paint() {
     var rectPosition by remember { mutableStateOf(0f) }
     var widthCanvas by remember { mutableStateOf(0f) }
     var colorRect by remember { mutableStateOf(Color.Blue) }
@@ -127,8 +127,7 @@ fun DrawScope.toDisplayX(oldX: Float): Float {
 private fun DrawScope.drawSin() {
     val points = mutableListOf<Offset>()
 
-
-    for (i in toCoordinateX(-100f).toInt()..toCoordinateX(100f).toInt() step 1) {
+    for (i in toCoordinateX(0f).toInt()..toCoordinateX(size.width).toInt() step 1) {
         val x = i.toFloat()
         val y = y2(x)
         points.add(toDisplayXY(Offset(x, y)))
